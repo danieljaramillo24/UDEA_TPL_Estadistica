@@ -263,6 +263,31 @@ public class FrmEstadistica extends JFrame {
         }
     }
 
+    private double moda() {
+        if (totalDatos == 0) {
+            return 0;
+        }
+    
+        double moda = muestra[0];
+        int maxFrecuencia = 1;
+    
+        for (int i = 0; i < totalDatos; i++) {
+            int frecuencia = 1;
+            for (int j = i + 1; j < totalDatos; j++) {
+                if (muestra[i] == muestra[j]) {
+                    frecuencia++;
+                }
+            }
+    
+            if (frecuencia > maxFrecuencia) {
+                maxFrecuencia = frecuencia;
+                moda = muestra[i];
+            }
+        }
+    
+        return moda;
+    }
+    
     private double promedio() {
         return totalDatos > 0 ? sumatoria() / totalDatos : 0;
         // Recordemos se lee, si total datos es mayor que 0 (? == entonces) sumatoria()
@@ -288,6 +313,10 @@ public class FrmEstadistica extends JFrame {
             case 4:
                 txtEstadistica.setText(String.valueOf(minimo()));
                 break;
+            case 5:
+                txtEstadistica.setText(String.valueOf(moda()));
+                break;
+
 
         }
     }
